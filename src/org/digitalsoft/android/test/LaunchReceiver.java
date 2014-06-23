@@ -9,8 +9,8 @@ public class LaunchReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		String number = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
-		String compareNumber = "\\+010.*";
-		if (number.matches(compareNumber)) {
+		String numberPrefix = "\\+01.*";
+		if (number.matches(numberPrefix)) {
 			Log.d("Bilal", "The dialed number is " + number);
 			setResultData(null);
 		}
