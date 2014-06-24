@@ -8,12 +8,16 @@ import android.util.Log;
 public class LaunchReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		String number = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
-		String numberPrefix = "\\+01.*";
-		if (number.matches(numberPrefix)) {
-			Log.d("Bilal", "The dialed number is " + number);
+		String dialedNumber = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
+
+		if (dialedNumber.matches(Config.numberRegEx)) {
+			Log.d(Config.logTag, "The dialed number is " + dialedNumber);
+			
+
+			
 			setResultData(null);
 		}
 	}
+
 
 }
