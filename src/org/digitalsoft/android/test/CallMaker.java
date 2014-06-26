@@ -4,26 +4,40 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 
 public class CallMaker {
 	public static void skype(String targetContact, Context context) throws ActivityNotFoundException {
-		// Intent sky = new Intent("android.intent.action.CALL_PRIVILEGED");
-		// the above line tries to create an intent for which the skype app doesn't supply public api
 		Intent intent = new Intent("android.intent.action.VIEW");
-		String URI = "skype:" + targetContact + "?call";
+		String URI = "skype:" + targetContact + "?chat";
 		intent.setData(Uri.parse(URI));
-		Log.d(Config.logTag, "skype:" + targetContact);
 		context.startActivity(intent);
 	}
+	
+	public static void viber(String targetContact, Context context) {
+		Intent intent = new Intent("android.intent.action.VIEW");
+		intent.setClassName("com.viber.voip", "com.viber.voip.WelcomeActivity");
+		Uri uri = Uri.parse("tel:" + Uri.encode(targetContact)); 
+		intent.setData(uri); 
+		context.startActivity(intent);
+	}
+
 
 	public static void dilaer(String targetContact, Context context) {
 		Intent intent = new Intent(Intent.ACTION_CALL);
 		String URI = "tel:" + targetContact;
 		intent.setData(Uri.parse(URI));
-		Log.d(Config.logTag, "dilaer:" + targetContact);
 		context.startActivity(intent);
 	}
+	
+	
+	public static void sms(String targetContact, Context context) {		
+		Intent smsIntent = new Intent(Intent.ACTION_SENDTO);
+		smsIntent.addCategory(Intent.CATEGORY_DEFAULT);
+		smsIntent.setType("vnd.android-dir/mms-sms");
+		smsIntent.setData(Uri.parse("sms:" + targetContact));
+		context.startActivity(smsIntent);	
+	}
+
 	
 	public static void email(String targetContact, Context context) {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
