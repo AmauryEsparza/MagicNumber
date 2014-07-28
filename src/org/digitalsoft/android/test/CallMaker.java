@@ -33,8 +33,7 @@ public class CallMaker {
 	public static void sms(String targetContact, Context context) {		
 		Intent smsIntent = new Intent(Intent.ACTION_SENDTO);
 		smsIntent.addCategory(Intent.CATEGORY_DEFAULT);
-		smsIntent.setType("vnd.android-dir/mms-sms");
-		smsIntent.setData(Uri.parse("sms:" + targetContact));
+		smsIntent.setDataAndType(Uri.parse("sms:" + targetContact), "vnd.android-dir/mms-sms");
 		context.startActivity(smsIntent);	
 	}
 
